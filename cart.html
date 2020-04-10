@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Store </title>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="header-cap">
+                <div class="header-logo">
+                    <a href="index.html"><img src="img/logo.png" alt="logo book store" width="150"></a>
+                </div>
+                <div class="header-search">
+                    <input id="search-main" type="search" placeholder="Search Book" disabled="disabled">
+                    <label class="search-main green-btn search-cart" for="search-main">
+                        <img src="img/search.svg" alt="cart logo">
+                        <span>Search</span>
+                    </label>
+                </div>
+                <div class="header-cart">
+                    <div class="cart-logo">
+                        <img src="img/cart_logo.svg" alt="cart logo">
+                    </div>
+                    <div class="cart-price">
+                        <p>$<span></span></p>
+                    </div>
+                    <a class="green-btn" href="cart.html">Checkout</a>
+                </div>
+            </div>
+            <div class="bottom-decorative-line"></div>
+        </header>
+        <div class="wrapper-cart">
+            <a href="index.html" class="close-cart green-btn">Continue shopping</a>
+            <div class="cart">
+                <a class="cart-link" href="index.html">
+                    <div class="cart-empty hidden-cart">
+                        <img src="img/cart_empty.png" alt="cart empty">
+                        <p>You shopping cart is <span>empty</span></p>
+                        <p>Please add books to cart</p>
+                    </div>
+                </a>
+
+                <!-- cart article add to js -->
+            </div>
+        </div>
+        <footer>
+            <div class="footer-cart">
+                <form class="footer-main-form" action="https://formspree.io/firstasv@gmail.com" method="POST">
+                    <label>
+                        <input type="text" placeholder="enter your name" name="user_name" required>
+                    </label>
+                    <label>
+                        <input type="tel" placeholder="enter your phone" name="user_phone" required>
+                    </label>
+                    <label>
+                        <input type="email" placeholder="enter your email" name="user_email" required>
+                    </label>
+                    <div class="book-order-list">
+
+                    </div>
+                    <input id="submit-form" type="submit" class="submit-btn green-btn" value="Confirm purchases">
+                </form>
+            </div>
+        </footer>
+        <script src="js/cart.js"></script>
+    </div>
+</body>
+
+</html>
