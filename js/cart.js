@@ -16,25 +16,25 @@
         let cartLocalStorage = JSON.parse(localStorage["cart"]);
         for (let i = 0; i < cartLocalStorage.length; i++) {
             cart.innerHTML +=
-                `
-        <article class="cart-article"  data-num-cart-array="${i}">
-            <img class="book-img" src="${cartLocalStorage[i]["url"]}" alt="Title${cartLocalStorage[i]["name"]}"
-                height="120">
-                <div class="data-id hiden">data-id: ${cartLocalStorage[i]["data-id"]}</div>
-            <div class="cart-article-information">
-                <h3 class="book-name">${cartLocalStorage[i]["name"]}</h3>
-                <p class="description">${cartLocalStorage[i]["description"]}</p>
-                
-                <div>
-                    <p class="book-price">Our price:$ <span>${cartLocalStorage[i]["price"]}</span></p>
-                    <label class="cart-delete-label" chart-index="${i}">
-                        <img src="img/cart_delete.png" alt="cart-delete-button" width="25">
-                        <button class="cart-delete-button" type="button"></button>
-                    </label>
+            `
+            <article class="cart-article"  data-num-cart-array="${i}">
+                <img class="book-img" src="${cartLocalStorage[i]["url"]}" alt="Title${cartLocalStorage[i]["name"]}"
+                    height="120">
+                    <div class="data-id hiden">data-id: ${cartLocalStorage[i]["data-id"]}</div>
+                <div class="cart-article-information">
+                    <h3 class="book-name">${cartLocalStorage[i]["name"]}</h3>
+                    <p class="description">${cartLocalStorage[i]["description"]}</p>
+                    
+                    <div>
+                        <p class="book-price">Our price:$ <span>${cartLocalStorage[i]["price"]}</span></p>
+                        <label class="cart-delete-label" chart-index="${i}">
+                            <img src="img/cart_delete.png" alt="cart-delete-button" width="25">
+                            <button class="cart-delete-button" type="button"></button>
+                        </label>
+                    </div>
                 </div>
-            </div>
-        </article>
-                `
+            </article>
+            `
         };
     }
 
@@ -42,24 +42,27 @@
     cart.addEventListener("click", function (event) {
         let cartArticle = document.querySelectorAll('.cart-article');
         if (event.target.className === 'cart-delete-button' && cartArticle.length > 1) {
-            deleteCartBook(event)
-            cartArticle = document.querySelectorAll('.cart-article');
+            deleteCartBook(event, cartArticle)
         } else if (event.target.className === 'cart-delete-button' && cartArticle.length === 1) {
-            deleteCartBook(event)
+            deleteCartBook(event, cartArticle)
             document.location.href = "index.html"
         };
     });
 
-    function deleteCartBook(event) {
-        let path = event.composedPath ? event.composedPath() : event.path;
+    function deleteCartBook(event, cartArticle) {
+        
         let localStorageCart = JSON.parse(localStorage["cart"]);
         let chartIndex = event.target.parentElement.getAttribute("chart-index");
         
-        localStorageCart.splice(chartIndex, 1);
+        for (let i = 0; i < cartArticle.length; i++) {
+            if (cartArticle[i]["attributes"][1]["value"] == chartIndex){
+                cartArticle[i].remove()
+                localStorageCart.splice(i, 1);
+            }
+        }
+
         localStorageCart = JSON.stringify(localStorageCart);
         localStorage.setItem("cart", localStorageCart);
-        
-        path[4].remove();
         calculatorCartPrice();
     };
 
