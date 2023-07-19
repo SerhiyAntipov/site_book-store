@@ -106,11 +106,11 @@
             let dataId = '';
             if (event.target.className === 'book-img') {
                 // definition data-id
-                dataId = event.path[1].attributes[1].nodeValue;
+                dataId = event.target.parentElement.getAttribute("data-id");
                 creationBookDescription(dataId, booksData);
             } else if (event.target.className === 'aside-button') {
                 // definition data-id
-                dataId = event.target.parentElement.parentElement.attributes[1].nodeValue;
+                dataId = event.target.parentElement.parentElement.getAttribute("data-id");
                 creationBookDescription(dataId, booksData);
             }
         });

@@ -27,7 +27,7 @@
                 
                 <div>
                     <p class="book-price">Our price:$ <span>${cartLocalStorage[i]["price"]}</span></p>
-                    <label class="cart-delete-label">
+                    <label class="cart-delete-label" chart-index="${i}">
                         <img src="img/cart_delete.png" alt="cart-delete-button" width="25">
                         <button class="cart-delete-button" type="button"></button>
                     </label>
@@ -42,21 +42,24 @@
     cart.addEventListener("click", function (event) {
         let cartArticle = document.querySelectorAll('.cart-article');
         if (event.target.className === 'cart-delete-button' && cartArticle.length > 1) {
-            deleteCartBook()
+            deleteCartBook(event)
             cartArticle = document.querySelectorAll('.cart-article');
         } else if (event.target.className === 'cart-delete-button' && cartArticle.length === 1) {
-            deleteCartBook()
+            deleteCartBook(event)
             document.location.href = "index.html"
         };
     });
 
-    function deleteCartBook() {
+    function deleteCartBook(event) {
+        let path = event.composedPath ? event.composedPath() : event.path;
         let localStorageCart = JSON.parse(localStorage["cart"]);
-        let dellElement = event.path[4].attributes[1].dellElement;
-        localStorageCart.splice(dellElement, 1);
+        let chartIndex = event.target.parentElement.getAttribute("chart-index");
+        
+        localStorageCart.splice(chartIndex, 1);
         localStorageCart = JSON.stringify(localStorageCart);
         localStorage.setItem("cart", localStorageCart);
-        event.path[4].remove();
+        
+        path[4].remove();
         calculatorCartPrice();
     };
 
